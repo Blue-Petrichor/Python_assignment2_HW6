@@ -9,27 +9,23 @@ def urlGetFile():
     """
     with urlopen("http://icarus.cs.weber.edu/~hvalle/cs3030/data/error.log.test") as error:
         error_file = []                     # set an empty array
-        #for lines in error:                 # iterate over file
-         #   lines_errors = lines.split()    # split file into a list
-          #  for logs in lines_errors:        # iterate over errors in list
-           #     error_file.append(logs.decode("utf-8")) # decode file
+        for lines in error:                 # iterate over file
+            lines_errors = lines.split()    # split file into a list
+            for logs in lines_errors:        # iterate over errors in list
+                error_file.append(logs.decode("utf-8")) # decode file
 
-            #    print(logs.decode("utf-8"))
+                #print(logs.decode("utf-8"))
+                file_out = logs.decode("utf-8")
+                f = (re.match("<span> &.ico </span>", file_out))
+                print(f)
 
-        for logs in error:        # iterate over errors in list
-            file_out =  error_file.append(logs.decode("utf-8")) # decode file
-            find_something = file_out.find(".ico")
-            print(find_something.decode("utf-8"))
 
 def main():
     """
 	Main function
     """
-    # call url get function
+    # call url get function that prints the file parsed into the array
     urlGetFile()
-
-    # call definition and call fetch words parameteri
-#    fetch_words(error_file)
 
     pass
 
