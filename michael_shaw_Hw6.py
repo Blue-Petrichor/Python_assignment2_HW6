@@ -1,17 +1,15 @@
 #!/user/bin/env python3
 import sys
 import re
+import argparse
 from urllib.request import urlopen
+        
 
-
-def help():
+def help_function():
     """
     Help fucntion:
-        Usage for file ./hw6.py <file_input>
+        Usage for file mihael_shaw_HW6.py <RunFile>
     """
-
-
-
 
 def urlGetFile():
     """
@@ -55,13 +53,22 @@ def main():
 	Main function
     """
     # call url get function that prints the file parsed into the array
-    urlGetFile()
+    urlGetFile()    
+    
 
     pass
 
 if __name__ == "__main__":
     #call main fuction
-    main()
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("RunFile", help="Help")
+    args = parser.parse_args()
+
+    if args.RunFile == "RunFile":
+        main()
+    else:
+        help_function()
 
     exit(0)
 
