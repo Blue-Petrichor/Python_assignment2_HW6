@@ -8,7 +8,8 @@ from urllib.request import urlopen
 def help_function():
     """
     Help fucntion:
-        Usage for file mihael_shaw_HW6.py <RunFile>
+        Usage for file:  michael_shaw_Hw6.py RunFile
+        To run file line should be typed as above
     """
 
 def urlGetFile():
@@ -67,8 +68,13 @@ if __name__ == "__main__":
 
     if args.RunFile == "RunFile":
         main()
-    else:
-        help_function()
+    elif args.RunFile != "RunFile":
+        print ("Usage: michael_shaw_Hw6.py FileName")
+        print ("File should be typed Exactly as above!")
+        print ("")
+    elif args.RunFile == "":
+        print ("Usage: michael_shaw_Hw6.py FileName")
+        print ("File should be typed Exactly as above!")
 
     exit(0)
 
