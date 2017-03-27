@@ -3,22 +3,52 @@ import sys
 import re
 from urllib.request import urlopen
 
+
+def help():
+    """
+    Help fucntion:
+        Usage for file ./hw6.py <file_input>
+    """
+
+
+
+
 def urlGetFile():
     """
     Get the file from a url (web) location
     """
     with urlopen("http://icarus.cs.weber.edu/~hvalle/cs3030/data/error.log.test") as error:
-        error_file = []                     # set an empty array
-        for lines in error:                 # iterate over file
-            lines_errors = lines.split()    # split file into a list
-            for logs in lines_errors:        # iterate over errors in list
-                error_file.append(logs.decode("utf-8")) # decode file
+        error_file  = []                     # set an empty array
+        urls_d = {}                          # instanciate the dictionary
 
-                #print(logs.decode("utf-8"))
-                file_out = logs.decode("utf-8")
-                f = (re.match("<span> &.ico </span>", file_out))
-                print(f)
+        # Compile the regex and put it into the variable regex for user later
+        regex = re.compile(".*/.*")
+        for logs in error:
+            error_file.append(logs.decode("utf-8"))
 
+        for line in error_file:
+            line_words = line.split()
+            for words in line_words:
+                var = regex.match(words)
+                if var:
+                    if var.group() in urls_d:
+                        urls_d[var.group()] += 1
+                    else:
+                        urls_d[var.group()] = 1
+                    break
+        print ("*** Top 25 page errors ***")
+        sorted_urls_d = sorted(urls_d, key=urls_d.get, reverse=True)
+
+        # Create a count to list only the first 25 from the count list
+        count = 0
+        for i in sorted_urls_d:
+            count +=1
+            # break when count of 25 has been reached
+            if (count > 25):
+                break
+            else:
+                # Print dictionary count and position
+                print ("Count: ", urls_d[i], " Page: ", i)
 
 def main():
     """
